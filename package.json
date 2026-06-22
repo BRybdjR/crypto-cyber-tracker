@@ -1,0 +1,15 @@
+{
+  "name": "crypto-cyber-tracker",
+  "version": "1.0.0",
+  "description": "Crypto Arbitrage Tracker and Simulator Mini App",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "axios": "^1.7.2",
+    "telegraf": "^4.16.3",
+    "sqlite3": "^5.1.7"
+  }
+}
