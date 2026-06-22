@@ -1,15 +1,16 @@
 {
-  "name": "crypto-cyber-tracker",
+  "name": "crypto-cyber-tracker-p2p-empire",
   "version": "1.0.0",
-  "description": "Crypto Arbitrage Tracker and Simulator Mini App",
+  "description": "Cyberpunk economic strategy game simulating spot and P2P crypto-arbitrage",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.19.2",
-    "axios": "^1.7.2",
-    "telegraf": "^4.16.3",
+    "axios": "^1.18.0",
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "socket.io": "^4.8.3",
     "sqlite3": "^5.1.7"
   }
 }
