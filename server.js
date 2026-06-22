@@ -4,6 +4,7 @@ const { Server } = require('socket.io');
 const sqlite3 = require('sqlite3').verbose();
 const axios = require('axios');
 const cors = require('cors');
+const { Telegraf } = require('telegraf');
 
 const app = express();
 app.use(cors());
@@ -423,6 +424,43 @@ async function getFullState(tg_id) {
     return { user, cards, infra };
 }
 
-server.listen(3000, () => {
-    console.log('Cyber Tracker Server listening on port 3000');
+// Telegram Bot Initialization
+if (process.env.BOT_TOKEN) {
+    const bot = new Telegraf(process.env.BOT_TOKEN);
+
+    bot.start((ctx) => {
+        ctx.reply(
+            "🔥 Welcome to *Crypto Cyber Tracker & P2P Empire*! 🔥\n\n" +
+            "Dive into the chaotic world of spot and P2P crypto-arbitrage.\n" +
+            "Manage infrastructure, dodge 115-FZ blocks, and become the ultimate P2P Boss.\n\n" +
+            "Click below to launch the Netrunner Terminal:",
+            {
+                parse_mode: 'Markdown',
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            {
+                                text: "💻 Launch Web App",
+                                web_app: { url: "https://crypto-cyber-tracker-1.onrender.com" }
+                            }
+                        ]
+                    ]
+                }
+            }
+        );
+    });
+
+    bot.launch();
+    console.log('Telegraf Bot launched.');
+
+    // Enable graceful stop
+    process.once('SIGINT', () => bot.stop('SIGINT'));
+    process.once('SIGTERM', () => bot.stop('SIGTERM'));
+} else {
+    console.warn("BOT_TOKEN is not defined in the environment. Telegram bot will not start.");
+}
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+    console.log(`Cyber Tracker Server listening on port ${PORT}`);
 });
